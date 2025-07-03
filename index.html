@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>성경 말씀 게임</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- 시작 화면 -->
+        <div id="welcome-screen" class="screen active">
+            <div class="logo">
+                <h1>📖 성경 말씀 게임</h1>
+                <p>하나님의 말씀을 재미있게 배워보세요!</p>
+            </div>
+            <div class="button-group">
+                <button id="admin-btn" class="btn btn-primary">관리자</button>
+                <button id="student-btn" class="btn btn-secondary">학생</button>
+            </div>
+        </div>
+
+        <!-- 관리자 로그인 화면 -->
+        <div id="admin-login-screen" class="screen">
+            <div class="form-container">
+                <h2>관리자 로그인</h2>
+                <form id="admin-login-form">
+                    <div class="form-group">
+                        <label for="church-name">교회 이름</label>
+                        <input type="text" id="church-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="admin-password">관리자 비밀번호</label>
+                        <input type="password" id="admin-password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">로그인</button>
+                    <button type="button" id="back-to-welcome" class="btn btn-outline">뒤로가기</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- 학생 로그인 화면 -->
+        <div id="student-login-screen" class="screen">
+            <div class="form-container">
+                <h2>게임 참여</h2>
+                <form id="student-login-form">
+                    <div class="form-group">
+                        <label for="student-church">교회 이름</label>
+                        <input type="text" id="student-church" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="student-name">내 이름</label>
+                        <input type="text" id="student-name" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">게임 시작!</button>
+                    <button type="button" id="back-to-welcome-student" class="btn btn-outline">뒤로가기</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- 관리자 대시보드 -->
+        <div id="admin-dashboard" class="screen">
+            <div class="dashboard-header">
+                <h2 id="admin-church-name">교회 관리자</h2>
+                <button id="admin-logout" class="btn btn-outline">로그아웃</button>
+            </div>
+            
+            <div class="dashboard-tabs">
+                <button class="tab-btn active" data-tab="verses">말씀 관리</button>
+                <button class="tab-btn" data-tab="students">학생 현황</button>
+                <button class="tab-btn" data-tab="rankings">랭킹</button>
+            </div>
+
+            <!-- 말씀 관리 탭 -->
+            <div id="verses-tab" class="tab-content active">
+                <div class="section-header">
+                    <h3>말씀 관리</h3>
+                    <button id="add-verse-btn" class="btn btn-primary">새 말씀 추가</button>
+                </div>
+                
+                <div id="add-verse-form" class="form-container" style="display: none;">
+                    <h4>새 말씀 추가</h4>
+                    <form id="verse-form">
+                        <div class="form-group">
+                            <label for="verse-reference">성경 구절 (예: 요한복음 3:16)</label>
+                            <input type="text" id="verse-reference" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="verse-text">말씀 내용</label>
+                            <textarea id="verse-text" required rows="4" placeholder="말씀 전체를 입력하세요. 게임에서 레벨별로 다른 난이도로 제공됩니다."></textarea>
+                        </div>
+                        <div class="button-group">
+                            <button type="submit" class="btn btn-primary">추가</button>
+                            <button type="button" id="cancel-add-verse" class="btn btn-outline">취소</button>
+                        </div>
+                    </form>
+                </div>
+                
+                <div id="verses-list" class="verses-container">
+                    <!-- 말씀 목록이 여기 표시됩니다 -->
+                </div>
+            </div>
+
+            <!-- 학생 현황 탭 -->
+            <div id="students-tab" class="tab-content">
+                <h3>학생 게임 현황</h3>
+                <div id="students-list" class="students-container">
+                    <!-- 학생 목록이 여기 표시됩니다 -->
+                </div>
+            </div>
+
+            <!-- 랭킹 탭 -->
+            <div id="rankings-tab" class="tab-content">
+                <div class="ranking-header">
+                    <h3>말씀 챔피언 랭킹 🏆</h3>
+                    <div class="ranking-toggle">
+                        <button id="overall-ranking-btn" class="ranking-toggle-btn active">전체 랭킹</button>
+                        <button id="verse-ranking-btn" class="ranking-toggle-btn">말씀별 랭킹</button>
+                    </div>
+                </div>
+                
+                <!-- 전체 랭킹 -->
+                <div id="overall-rankings" class="rankings-view active">
+                    <div id="rankings-list" class="rankings-container">
+                        <!-- 전체 랭킹이 여기 표시됩니다 -->
+                    </div>
+                </div>
+                
+                <!-- 말씀별 랭킹 -->
+                <div id="verse-rankings" class="rankings-view">
+                    <div id="verse-ranking-selector" class="verse-ranking-selector">
+                        <h4>말씀을 선택하세요</h4>
+                        <div id="verse-ranking-list" class="verse-ranking-list">
+                            <!-- 말씀 목록이 여기 표시됩니다 -->
+                        </div>
+                    </div>
+                    
+                    <div id="verse-ranking-details" class="verse-ranking-details" style="display: none;">
+                        <div class="verse-ranking-header">
+                            <h4 id="selected-verse-title">선택된 말씀</h4>
+                            <button id="back-to-verse-list" class="btn btn-outline btn-small">목록으로</button>
+                        </div>
+                        <div id="verse-ranking-content" class="verse-ranking-content">
+                            <!-- 말씀별 상세 랭킹이 여기 표시됩니다 -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 게임 화면 -->
+        <div id="game-screen" class="screen">
+            <div class="game-header">
+                <div class="player-info">
+                    <span id="player-name">학생</span>
+                    <span id="player-church">교회</span>
+                </div>
+                <div class="game-stats">
+                    <span id="current-level">레벨 1</span>
+                    <span id="current-score">점수: 0</span>
+                </div>
+                <button id="game-logout" class="btn btn-outline">나가기</button>
+            </div>
+
+            <div class="level-selector">
+                <h3>말씀을 선택하세요</h3>
+                <div class="verse-selection">
+                    <!-- 말씀 선택이 여기 표시됩니다 -->
+                </div>
+            </div>
+
+            <div id="game-content" class="game-content" style="display: none;">
+                <div class="game-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill"></div>
+                    </div>
+                    <span id="question-counter">레벨 1</span>
+                </div>
+
+                <div class="verse-display">
+                    <h4 id="verse-reference">성경 구절</h4>
+                    <div id="verse-with-blanks" class="verse-text">
+                        <!-- 빈칸이 있는 말씀이 표시됩니다 -->
+                    </div>
+                </div>
+
+                <div class="answer-options">
+                    <div id="word-options" class="word-options">
+                        <!-- 선택할 단어들이 표시됩니다 -->
+                    </div>
+                </div>
+
+                <div class="game-controls">
+                    <button id="hint-btn" class="btn btn-secondary">힌트 💡</button>
+                </div>
+            </div>
+
+            <div id="level-complete" class="level-complete" style="display: none;">
+                <div class="complete-content">
+                    <h3>🎉 레벨 완료!</h3>
+                    <p class="score-display">점수: <span id="final-score">0</span>점</p>
+                    <p class="performance-message" id="performance-message"></p>
+                    <div class="button-group">
+                        <button id="next-level" class="btn btn-primary">다음 레벨</button>
+                        <button id="retry-level" class="btn btn-secondary">다시 도전</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 음향 효과는 Web Audio API로 자동 생성됩니다 -->
+
+    <!-- Firebase SDK (CDN 방식) -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+    
+    <script src="firebase-config.js"></script>
+    <script src="game.js"></script>
+</body>
+</html> 
