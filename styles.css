@@ -1490,4 +1490,121 @@ body {
         min-height: 60px !important;
         padding: 15px !important;
     }
+    
+    /* 모바일 환경 안내 메시지 */
+    .mobile-notice {
+        background: #fff3cd;
+        border: 1px solid #ffeaa7;
+        border-radius: 8px;
+        padding: 10px;
+        margin: 15px 0;
+        font-size: 0.9rem;
+        color: #856404;
+    }
+    
+    .mobile-notice strong {
+        color: #5a67d8;
+    }
+    
+    /* 모바일에서 마이크 테스트 버튼 */
+    #test-mic-btn {
+        margin-bottom: 10px !important;
+        width: 100%;
+        max-width: 200px;
+    }
+    
+    /* 모바일에서 녹음 버튼 크기 조정 */
+    #record-btn {
+        width: 100%;
+        max-width: 250px;
+        margin: 0 auto;
+    }
+    
+    /* 모바일에서 음성 인식 결과 표시 */
+    .recognized-text-container {
+        margin: 20px 0 !important;
+    }
+    
+    #recognized-text {
+        border-radius: 8px !important;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* 모바일에서 음성 인식 버튼들 */
+    .speech-controls .btn {
+        margin: 5px;
+        min-width: 120px;
+    }
+    
+    /* 모바일에서 녹음 표시기 */
+    #recording-indicator {
+        padding: 10px;
+        border-radius: 8px;
+        background: rgba(245, 101, 101, 0.1);
+        margin: 10px 0;
+        text-align: center;
+    }
+    
+    #recording-indicator small {
+        display: block;
+        margin-top: 5px;
+        font-size: 0.8rem;
+        color: #666;
+    }
+}
+
+/* 화면 잠금 방지 알림 */
+.screen-lock-warning {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #f59e0b;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    z-index: 9999;
+    animation: slideInUp 0.5s ease;
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .screen-lock-warning {
+        display: block;
+    }
+}
+
+/* 음성 인식 재시작 표시 */
+.speech-restart-indicator {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(90, 103, 216, 0.9);
+    color: white;
+    padding: 15px 25px;
+    border-radius: 15px;
+    z-index: 9999;
+    animation: fadeInOut 2s ease;
+    display: none;
+}
+
+@keyframes fadeInOut {
+    0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+    50% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    100% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+}
+
+/* 모바일 환경에서 터치 친화적인 버튼 */
+@media (max-width: 768px) {
+    .btn {
+        min-height: 44px;
+        touch-action: manipulation;
+    }
+    
+    .speech-recognition-container .btn {
+        font-size: 1rem;
+        padding: 12px 20px;
+    }
 } 
