@@ -1423,4 +1423,71 @@ body {
 .empty-verse-ranking p {
     margin: 0;
     font-size: 0.9rem;
+}
+
+/* 음성 인식 애니메이션 */
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+/* 음성 인식 컨테이너 */
+.speech-recognition-container {
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.speech-recognition-container .original-verse {
+    margin-bottom: 30px;
+}
+
+.speech-recognition-container .speech-controls {
+    border-top: 2px solid #e2e8f0;
+    border-bottom: 2px solid #e2e8f0;
+    padding: 30px 0;
+    margin: 30px 0;
+}
+
+.speech-recognition-container .recognized-text-container {
+    margin: 30px 0;
+}
+
+/* 음성 인식 결과 애니메이션 */
+.speech-result {
+    animation: slideInUp 0.5s ease-out;
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 모바일에서 음성 인식 */
+@media (max-width: 768px) {
+    .speech-recognition-container {
+        padding: 10px;
+    }
+    
+    .speech-recognition-container .speech-controls {
+        padding: 20px 0;
+        margin: 20px 0;
+    }
+    
+    #record-btn {
+        font-size: 1rem !important;
+        padding: 12px 24px !important;
+    }
+    
+    #recognized-text {
+        font-size: 1rem !important;
+        min-height: 60px !important;
+        padding: 15px !important;
+    }
 } 
